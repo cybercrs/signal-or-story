@@ -1,0 +1,710 @@
+"""Student-safe scenario content for Signal or Story.
+
+The app intentionally contains evidence and coaching, but not an instructor model
+answer. The instructor-only route interpretation lives outside the GitHub-ready
+project folder.
+"""
+
+COMMON_EVIDENCE = [
+    (
+        "Dashboard count",
+        "The dashboard reports 38 override-closure rows in four weeks; 31 fall within 15 minutes of dispatch. It does not display unique override IDs or work-order versions, so the team cannot yet tell whether one override can appear more than once.",
+    ),
+    (
+        "Policy",
+        "Overrides are allowed for documented operational emergencies and require a reason code plus same-day independent approval.",
+    ),
+    (
+        "Sample of 15",
+        "Eight lacked a reason code; five showed the same user initiating and approving; six attached the supporting work order the next day.",
+    ),
+    (
+        "System history",
+        "Twelve override records were edited after the initial supervisor review.",
+    ),
+]
+
+SCENARIO_BRIEF = (
+    "You are three weeks into an internal audit of Vela Mobility's fleet-maintenance "
+    "process. An override allows a vehicle to be released when the normal maintenance "
+    "workflow has not closed cleanly, so each override must be justified, independently "
+    "approved, and supported by reliable records. The audit team must determine whether "
+    "the pattern reflects a dashboard counting problem, a control problem, or both. Your team is "
+    "meeting with Marcus Hale, Director of Fleet Maintenance, to test his explanation."
+)
+
+PROCESS_OWNER_EXPLANATION = (
+    "The 38 dashboard rows overstate the number of distinct overrides because reopened "
+    "work orders appear more than once. We were also short an overnight supervisor, and "
+    "the maintenance work was completed before dispatch even when the attachment posted later."
+)
+
+LENSES = {
+    "dashboard": {
+        "title": "Dashboard logic",
+        "brief": (
+            "Your team has been asked to test the double-counting explanation. "
+            "Separate a dashboard counting problem from the underlying override population."
+        ),
+        "question_tactics": {
+            "trace": {
+                "label": "Trace one reopened work order",
+                "prompt": "Walk through one reopening from the original work order to every dashboard row and audit-log record.",
+                "response": (
+                    "Marcus says a reopened job receives another dashboard closure row, "
+                    "but he is unsure whether the override audit log also creates a new record."
+                ),
+                "coach": "This creates a record-by-record test and distinguishes the dashboard from the source log.",
+            },
+            "scope": {
+                "label": "Test how much the explanation could cover",
+                "prompt": "How many of the 31 near-dispatch closures came from reopened work orders, and how is that count produced?",
+                "response": (
+                    "Marcus estimates that reopenings explain most of the pattern but has "
+                    "not reconciled dashboard rows to unique override IDs."
+                ),
+                "coach": "This tests scope, but the estimate remains inquiry rather than corroboration.",
+            },
+            "challenge": {
+                "label": "Challenge the dashboard explanation",
+                "prompt": "Isn't double-counting just an excuse for the override spike?",
+                "response": (
+                    "Marcus repeats that the dashboard is unreliable and asks the team to "
+                    "speak with the system administrator. He provides no additional detail."
+                ),
+                "coach": "The challenge may signal skepticism, but its accusatory premise produces little testable detail.",
+            },
+        },
+        "evidence_options": {
+            "raw_log": {
+                "label": "Raw override log + work-order version map",
+                "request": "Unique override IDs, linked work-order version IDs, creation times, and closure times for the four-week period.",
+            },
+            "transform": {
+                "label": "Dashboard transformation logic",
+                "request": "The dashboard join rules, field definitions, and one reproduced reopening from source record to displayed row.",
+            },
+            "summary": {
+                "label": "A revised dashboard total",
+                "request": "Management's adjusted count after removing rows it identifies as duplicates.",
+            },
+        },
+        "pressure": (
+            "The COO says the dashboard is obviously imperfect and asks the team to drop "
+            "the issue before tomorrow's operations meeting."
+        ),
+    },
+    "approval": {
+        "title": "Approval independence",
+        "brief": (
+            "Your team has been asked to test whether the supervisor vacancy explains "
+            "same-user initiation and approval—and whether any alternative approval was authorized."
+        ),
+        "question_tactics": {
+            "trace": {
+                "label": "Trace one same-user approval",
+                "prompt": "Walk through who initiated, reviewed, and approved one sampled override on a vacancy shift.",
+                "response": (
+                    "Marcus says the ranking employee handled the release and that a regional "
+                    "manager was usually informed later that day."
+                ),
+                "coach": "This separates operational necessity, formal authorization, and approval timing.",
+            },
+            "scope": {
+                "label": "Test the vacancy boundary",
+                "prompt": "Which shifts lacked a supervisor, and do all same-user approvals fall within those shifts?",
+                "response": (
+                    "Marcus identifies six affected shifts but cannot say whether every "
+                    "same-user approval occurred during them."
+                ),
+                "coach": "This predicts a clean comparison between roster dates and record-level approval history.",
+            },
+            "challenge": {
+                "label": "Challenge the policy deviation",
+                "prompt": "You approved your own overrides because no one was watching, correct?",
+                "response": (
+                    "Marcus rejects the characterization and says the team does not understand "
+                    "overnight operations. The interview stalls."
+                ),
+                "coach": "The question assumes intent and a control failure before the approval sequence is corroborated.",
+            },
+        },
+        "evidence_options": {
+            "approval_log": {
+                "label": "Immutable approval history",
+                "request": "Initiator, first approver, subsequent approver, timestamp, and reason code for every sampled override.",
+            },
+            "roster": {
+                "label": "Roster + delegated-authority records",
+                "request": "Supervisor roster, vacancy dates, approved delegations, and emergency authority for the four-week period.",
+            },
+            "attestations": {
+                "label": "Supervisor attestations",
+                "request": "Statements from supervisors identifying which releases they remember approving.",
+            },
+        },
+        "pressure": (
+            "The operations vice president calls the same-user approvals a necessary staffing "
+            "exception and asks the team to document the explanation without further testing."
+        ),
+    },
+    "timing": {
+        "title": "Maintenance and release timing",
+        "brief": (
+            "Your team has been asked to test the claim that maintenance was complete before "
+            "dispatch even when supporting documents appeared later."
+        ),
+        "question_tactics": {
+            "trace": {
+                "label": "Trace one vehicle timeline",
+                "prompt": "Walk through one sampled vehicle from technician completion to work-order upload, approval, dispatch, and first movement.",
+                "response": (
+                    "Marcus says technicians sometimes finish work in an offline mobile app, "
+                    "then upload the work order after the vehicle leaves the bay."
+                ),
+                "coach": "This predicts multiple independent timestamps instead of treating upload time as completion time.",
+            },
+            "scope": {
+                "label": "Test how often late posting occurs",
+                "prompt": "Which late attachments came from offline work, and what record preserves the original completion time?",
+                "response": (
+                    "Marcus says offline work was common overnight but cannot identify the six "
+                    "sampled records without the mobile-device history."
+                ),
+                "coach": "This turns a general explanation into a population and record-source question.",
+            },
+            "challenge": {
+                "label": "Challenge the safety claim",
+                "prompt": "Can you prove you did not release unsafe vehicles?",
+                "response": (
+                    "Marcus says no safety incidents were reported and asks what evidence the "
+                    "audit team actually wants."
+                ),
+                "coach": "The question is overbroad and shifts evidence design to the interviewee.",
+            },
+        },
+        "evidence_options": {
+            "timeline": {
+                "label": "Combined event timeline",
+                "request": "Original technician event, upload, approval, dispatch, and telematics timestamps for all 15 sampled vehicles.",
+            },
+            "work_orders": {
+                "label": "Work-order history",
+                "request": "Version history, technician identity, completion status, and attachment metadata for the sample.",
+            },
+            "incidents": {
+                "label": "Safety-incident summary",
+                "request": "Reported maintenance or safety incidents involving the sampled vehicles during the period.",
+            },
+        },
+        "pressure": (
+            "The maintenance director says no accident occurred and asks the team to remove any "
+            "language suggesting that vehicles may have been released before work was complete."
+        ),
+    },
+    "edits": {
+        "title": "Post-review edits",
+        "brief": (
+            "Your team has been asked to determine what changed after supervisor review, who "
+            "changed it, and whether the audit trail preserves the original state."
+        ),
+        "question_tactics": {
+            "trace": {
+                "label": "Trace one edited record",
+                "prompt": "Walk through one post-review edit: which field changed, who changed it, why, and what preserved the original value?",
+                "response": (
+                    "Marcus says staff correct labels and attach missing documents after review, "
+                    "but he does not know whether approval fields can also be edited."
+                ),
+                "coach": "This distinguishes routine cleanup from changes that affect the control conclusion.",
+            },
+            "scope": {
+                "label": "Classify the twelve edits",
+                "prompt": "How many edits affected labels, supporting documents, reason codes, approvers, or timestamps?",
+                "response": (
+                    "Marcus believes most edits were administrative but has not classified them "
+                    "by field or user."
+                ),
+                "coach": "This predicts a field-level change analysis and avoids treating every edit as equally risky.",
+            },
+            "challenge": {
+                "label": "Challenge the edit history",
+                "prompt": "Who altered the records after they knew audit was reviewing them?",
+                "response": (
+                    "Marcus says editing is normal and asks the team not to imply evidence tampering."
+                ),
+                "coach": "The question assumes motive and timing that the current evidence does not establish.",
+            },
+        },
+        "evidence_options": {
+            "journal": {
+                "label": "Immutable field-change journal",
+                "request": "Before/after values, user IDs, timestamps, and source process for all twelve post-review edits.",
+            },
+            "change_tickets": {
+                "label": "System change and interface tickets",
+                "request": "Approved patches, interface errors, and data-correction tickets during the four-week period.",
+            },
+            "edited_export": {
+                "label": "Current edited-record export",
+                "request": "The latest version of the twelve records with their current reason codes and approvers.",
+            },
+        },
+        "pressure": (
+            "The system owner calls the edits ordinary data hygiene and asks the team not to "
+            "elevate a technical issue to management."
+        ),
+    },
+}
+
+
+TEAM_ROUTES = {
+    1: {"code": "ASTER", "lens": "dashboard", "variant": "A"},
+    2: {"code": "BEACON", "lens": "approval", "variant": "A"},
+    3: {"code": "COBALT", "lens": "timing", "variant": "A"},
+    4: {"code": "DELTA", "lens": "edits", "variant": "A"},
+    5: {"code": "EMBER", "lens": "dashboard", "variant": "B"},
+    6: {"code": "FALCON", "lens": "approval", "variant": "B"},
+    7: {"code": "GROVE", "lens": "timing", "variant": "B"},
+    8: {"code": "HARBOR", "lens": "edits", "variant": "B"},
+    9: {"code": "INDIGO", "lens": "dashboard", "variant": "C"},
+    10: {"code": "JUNIPER", "lens": "approval", "variant": "C"},
+    11: {"code": "KESTREL", "lens": "timing", "variant": "C"},
+    12: {"code": "LUMEN", "lens": "edits", "variant": "C"},
+}
+
+
+ROUTE_EVIDENCE = {
+    "ASTER": {
+        "raw_log": {
+            "impact": "mixed",
+            "result": "Fourteen near-dispatch dashboard rows represent seven reopened jobs. The other seventeen rows map to distinct override IDs.",
+        },
+        "transform": {
+            "impact": "decrease",
+            "result": "The dashboard joins on work-order number without a version key, so every reopening repeats the prior closure row. The logic reproduces seven pairs of duplicates.",
+        },
+        "summary": {
+            "impact": "limited",
+            "result": "Management removes fourteen rows and reports seventeen near-dispatch overrides, but supplies no mapping to unique source records.",
+        },
+    },
+    "EMBER": {
+        "raw_log": {
+            "impact": "mixed",
+            "result": "Reconstructing unique IDs reduces 38 dashboard rows to 29 overrides. Twenty-three of the 29 remain within fifteen minutes of dispatch.",
+        },
+        "transform": {
+            "impact": "mixed",
+            "result": "The transformation can duplicate reopened jobs, but it also rounds all event times to fifteen-minute intervals, limiting sequence analysis.",
+        },
+        "summary": {
+            "impact": "limited",
+            "result": "A revised dashboard shows 29 overrides but does not distinguish reopened jobs or preserve exact event times.",
+        },
+    },
+    "INDIGO": {
+        "raw_log": {
+            "impact": "increase",
+            "result": "All 38 closure IDs are unique. Reopened work orders link to earlier jobs but do not create duplicate override IDs in the source log.",
+        },
+        "transform": {
+            "impact": "increase",
+            "result": "The dashboard specification shows one row per override ID. A reproduced reopening does not repeat the original closure.",
+        },
+        "summary": {
+            "impact": "limited",
+            "result": "Management supplies a lower adjusted total but cannot identify the rows removed or reproduce its adjustment.",
+        },
+    },
+    "BEACON": {
+        "approval_log": {
+            "impact": "mixed",
+            "result": "Five same-user approvals occurred on vacancy shifts; four additional same-user approvals occurred when a supervisor was scheduled.",
+        },
+        "roster": {
+            "impact": "mixed",
+            "result": "The vacancy affected six shifts. An email names an acting lead, but no approved delegation defines that person's override authority.",
+        },
+        "attestations": {
+            "impact": "limited",
+            "result": "Two supervisors remember being contacted, but neither can identify specific overrides or the timing of approval.",
+        },
+    },
+    "FALCON": {
+        "approval_log": {
+            "impact": "decrease",
+            "result": "All five same-user approvals occurred on vacancy shifts and received independent regional-manager approval later the same day—but after dispatch.",
+        },
+        "roster": {
+            "impact": "decrease",
+            "result": "The six vacancy shifts align with every same-user approval. A contingency memo requires later same-day regional approval but does not waive reason codes.",
+        },
+        "attestations": {
+            "impact": "limited",
+            "result": "The regional manager recalls approving the exceptions but cannot establish whether approval preceded or followed dispatch.",
+        },
+    },
+    "JUNIPER": {
+        "approval_log": {
+            "impact": "increase",
+            "result": "Same-user initiation and approval occurred across eleven shifts and two locations. No subsequent independent approval appears for seven records.",
+        },
+        "roster": {
+            "impact": "increase",
+            "result": "Only two of the eleven affected shifts lacked a supervisor. No delegation or emergency-authority record was approved.",
+        },
+        "attestations": {
+            "impact": "limited",
+            "result": "Supervisors provide inconsistent recollections and no record-level identification of approvals.",
+        },
+    },
+    "COBALT": {
+        "timeline": {
+            "impact": "mixed",
+            "result": "Eleven vehicles show technician completion before first movement. Four show completion 12–41 minutes after telematics recorded movement.",
+        },
+        "work_orders": {
+            "impact": "mixed",
+            "result": "Eleven work orders preserve pre-dispatch completion. Four were manually completed later and do not retain an earlier offline event.",
+        },
+        "incidents": {
+            "impact": "limited",
+            "result": "No reported safety incident names a sampled vehicle. The report does not establish when maintenance was completed.",
+        },
+    },
+    "GROVE": {
+        "timeline": {
+            "impact": "decrease",
+            "result": "Fourteen vehicles show technician completion before dispatch. Device-sync logs explain five late uploads; one record has no completion event.",
+        },
+        "work_orders": {
+            "impact": "decrease",
+            "result": "Fourteen work orders carry digitally signed pre-dispatch completion events. One attachment lacks a technician signature and original event time.",
+        },
+        "incidents": {
+            "impact": "limited",
+            "result": "No sampled vehicle appears in the incident system, but the absence of a reported incident does not test completion timing.",
+        },
+    },
+    "KESTREL": {
+        "timeline": {
+            "impact": "increase",
+            "result": "Six vehicles moved before the recorded maintenance completion event. Three completion times were edited after dispatch.",
+        },
+        "work_orders": {
+            "impact": "increase",
+            "result": "Nine of fifteen completion fields were manually entered after dispatch. Standard reports do not display the original values.",
+        },
+        "incidents": {
+            "impact": "limited",
+            "result": "No collision was reported, but two sampled vehicles returned for the same maintenance condition within forty-eight hours.",
+        },
+    },
+    "DELTA": {
+        "journal": {
+            "impact": "mixed",
+            "result": "Eight edits corrected labels or attachments. Four changed a reason code or approver after supervisor review.",
+        },
+        "change_tickets": {
+            "impact": "mixed",
+            "result": "One interface ticket explains six modified timestamps, but no ticket covers the four reason-code or approver changes.",
+        },
+        "edited_export": {
+            "impact": "limited",
+            "result": "The current export shows completed reason codes and independent approvers but does not preserve prior values or edit users.",
+        },
+    },
+    "HARBOR": {
+        "journal": {
+            "impact": "decrease",
+            "result": "Ten records retain the same substantive values; a vendor sync rewrote their modified timestamps. Two records contain later approval changes.",
+        },
+        "change_tickets": {
+            "impact": "decrease",
+            "result": "An approved vendor patch explains ten timestamp changes. The ticket does not explain two approval-field edits made by a supervisor.",
+        },
+        "edited_export": {
+            "impact": "limited",
+            "result": "The latest export appears complete but cannot distinguish vendor metadata updates from human edits.",
+        },
+    },
+    "LUMEN": {
+        "journal": {
+            "impact": "increase",
+            "result": "Eleven records changed the approver ID from the initiating user to a different supervisor after the initial review. Original values remain in the journal.",
+        },
+        "change_tickets": {
+            "impact": "increase",
+            "result": "No change ticket or interface incident covers the approval-field edits. User sessions show manual changes.",
+        },
+        "edited_export": {
+            "impact": "limited",
+            "result": "The current records show independent approvers, but the export omits the original same-user approvals and edit sequence.",
+        },
+    },
+}
+
+
+PRESSURE_CHOICES = {
+    "close": {
+        "label": "Close the issue based on the explanation",
+        "stance": "Accept the explanation and remove the matter from follow-up.",
+    },
+    "narrow": {
+        "label": "Narrow what is resolved and keep the rest open",
+        "stance": "Acknowledge supported context, name the unresolved condition, and request responsive evidence.",
+    },
+    "escalate": {
+        "label": "Escalate the matter immediately",
+        "stance": "Treat the pattern as a serious exception and elevate it before completing the remaining test.",
+    },
+}
+
+
+EVIDENCE_GUIDANCE = {
+    "dashboard": {
+        "raw_log": {
+            "prediction": "Repeated dashboard rows should map to the same underlying override ID.",
+            "why": "This compares the report with the source population and preserves record identity and sequence.",
+            "preparation_prompt": "How does one reopened work order create records in the dashboard and source log?",
+            "without_context": "The export contains override IDs and work-order version IDs, but the team has not established how a reopening should appear across the dashboard and source log. The file cannot yet distinguish a repeated dashboard row from a separate override.",
+        },
+        "transform": {
+            "prediction": "The join rules should reproduce a duplicate when a work order is reopened.",
+            "why": "This tests the claimed reporting mechanism rather than relying on an adjusted total.",
+            "preparation_prompt": "How is the 31-row near-dispatch count produced, and which reopenings could affect it?",
+            "without_context": "The team receives join logic and field definitions, but it has not established which dashboard count or reopening pattern the logic must explain. The document does not yet show how much of the 31-row pattern could be duplicated.",
+        },
+        "summary": {
+            "prediction": "Management's revised count should be lower after identified duplicate rows are removed.",
+            "why": "This may show the size of management's adjustment, but it does not independently preserve the row-to-source mapping.",
+            "preparation_prompt": "Which records does management believe are duplicated, and how would that claim be tested?",
+            "without_context": "Management provides a lower total, but the team has not established which rows management considers duplicates or how the adjustment was produced. The number cannot be connected to the original records.",
+        },
+    },
+    "approval": {
+        "approval_log": {
+            "prediction": "Same-user approvals should align with vacancy shifts, and any later independent approval should be visible.",
+            "why": "This directly tests who approved each override and when approval occurred.",
+            "preparation_prompt": "What initiation, review, and approval sequence should appear for an override handled during a vacancy shift?",
+            "without_context": "The history lists users and timestamps, but the team has not established the expected approval sequence during a vacancy shift. Several handoffs appear, yet the team cannot determine which action represents authorized independent approval.",
+        },
+        "roster": {
+            "prediction": "The affected approval dates should align with documented vacancies and authorized delegations.",
+            "why": "This tests operating context and authority, but not the record-level approval sequence by itself.",
+            "preparation_prompt": "Which shifts lacked a supervisor, and which same-user approvals should be compared with those shifts?",
+            "without_context": "The roster and delegation files identify shifts and job titles, but the team has not established which approval dates require comparison. The records cannot yet connect staffing gaps to the sampled same-user approvals.",
+        },
+        "attestations": {
+            "prediction": "Supervisors should consistently identify the specific releases they approved and when.",
+            "why": "Recollection may provide a lead, but it is less reliable than preserved approval history.",
+            "preparation_prompt": "Which specific releases, shifts, and approval times should supervisors be asked to address?",
+            "without_context": "Supervisors offer general recollections, but the team did not first define the releases, shifts, or approval times the statements should address. The responses cannot be tied to a sampled override.",
+        },
+    },
+    "timing": {
+        "timeline": {
+            "prediction": "Technician-completion events should precede dispatch and first movement even when uploads occur later.",
+            "why": "This compares independent events across the maintenance, dispatch, and telematics systems.",
+            "preparation_prompt": "Which event represents completed maintenance, and how should it relate to upload, dispatch, and first movement?",
+            "without_context": "The file combines several timestamps, but the team has not established which event represents completed maintenance or how offline work appears. The sequence cannot yet distinguish late posting from late completion.",
+        },
+        "work_orders": {
+            "prediction": "The original work-order history should preserve a pre-dispatch completion event or offline-device timestamp.",
+            "why": "This tests whether late posting differs from late completion, although it still needs an independent release time.",
+            "preparation_prompt": "Which late attachments allegedly came from offline work, and what record should preserve the original completion time?",
+            "without_context": "The work-order history shows versions and attachments, but the team has not established which records allegedly originated offline or which field preserves the original completion event. The file cannot yet resolve posting versus completion timing.",
+        },
+        "incidents": {
+            "prediction": "Sampled vehicles may have no related safety incidents after release.",
+            "why": "Incident history concerns outcomes; it cannot establish when maintenance was completed.",
+            "preparation_prompt": "What would an incident summary establish, and what timing question would it leave unanswered?",
+            "without_context": "The incident summary lists reported outcomes, but the team has not defined how those outcomes connect to the maintenance-timing claim. It provides no basis for determining whether work was complete before dispatch.",
+        },
+    },
+    "edits": {
+        "journal": {
+            "prediction": "The journal should show label or attachment changes without altered approval, reason-code, or original timestamp fields.",
+            "why": "Before-and-after values identify what changed, who changed it, and whether the control conclusion could be affected.",
+            "preparation_prompt": "How does one post-review edit move from the original value to the current value, and which fields could affect approval?",
+            "without_context": "The journal contains before-and-after values and user IDs, but the team has not established the edit process or which fields could change the control conclusion. The entries cannot yet be classified as routine or substantive.",
+        },
+        "change_tickets": {
+            "prediction": "Approved tickets should align with the affected records, fields, users, and timestamps.",
+            "why": "This can explain automated changes but does not replace the record-level journal.",
+            "preparation_prompt": "Which of the twelve edits affected each field, and which system process could have produced them?",
+            "without_context": "The tickets describe patches and interface errors, but the team has not classified the twelve edits by field or user. The documents cannot yet be matched to the changes that matter to approval integrity.",
+        },
+        "edited_export": {
+            "prediction": "The export should show complete reason codes and independent approvers.",
+            "why": "The latest state may look complete while concealing original values and edit sequence.",
+            "preparation_prompt": "Which original values, edit users, and timestamps are needed to interpret the current records?",
+            "without_context": "The export shows the current reason codes and approvers, but the team has not established which original values or edit sequence it needs. The current state cannot explain what changed after review.",
+        },
+    },
+}
+
+
+INTERPRETATION_CHOICES = {
+    "decrease": {
+        "bounded": {
+            "label": "Increase confidence in this part of Marcus's explanation, while keeping every untested exception open.",
+            "status": "strong",
+            "feedback": "The evidence supports some operating context without automatically resolving the other original signals.",
+        },
+        "close_all": {
+            "label": "Treat the entire override process as effective and close every original concern.",
+            "status": "revise",
+            "feedback": "Support for one claim does not establish that missing reason codes, approvals, timing, and edits are all acceptable.",
+        },
+        "discount": {
+            "label": "Do not change confidence because an interview explanation should never influence audit judgment.",
+            "status": "revise",
+            "feedback": "Inquiry can change what you test; confidence should change when responsive evidence—not the interview alone—supports the claim.",
+        },
+    },
+    "increase": {
+        "bounded": {
+            "label": "Decrease confidence in this part of the explanation; the record conflicts with it, but intent and other issues remain untested.",
+            "status": "strong",
+            "feedback": "This recognizes adverse evidence without turning a control exception into an unsupported accusation.",
+        },
+        "fraud": {
+            "label": "Conclude that management intentionally falsified the records and that the entire process failed.",
+            "status": "revise",
+            "feedback": "The evidence may establish a conflicting condition, but it does not yet establish intent or population-wide failure.",
+        },
+        "demeanor": {
+            "label": "Leave confidence unchanged because Marcus still sounds certain about the explanation.",
+            "status": "revise",
+            "feedback": "Demeanor does not outweigh responsive source evidence.",
+        },
+    },
+    "mixed": {
+        "bounded": {
+            "label": "Move confidence only for the records the evidence explains and isolate the remaining exceptions.",
+            "status": "strong",
+            "feedback": "Mixed evidence calls for a narrower conclusion, not an average applied to the entire population.",
+        },
+        "average": {
+            "label": "Treat the supportive and conflicting records as canceling each other out, so no conclusion is possible.",
+            "status": "revise",
+            "feedback": "Different records can support different interim conclusions; they do not disappear when averaged together.",
+        },
+        "all_fail": {
+            "label": "Treat every record as a failure because at least one exception remains.",
+            "status": "revise",
+            "feedback": "The conclusion would exceed the records that actually conflict with the explanation.",
+        },
+    },
+    "limited": {
+        "bounded": {
+            "label": "Do not materially move confidence; the source is too limited to test the claimed sequence or original state.",
+            "status": "strong",
+            "feedback": "A plausible but nonresponsive source should lead to a better evidence request, not a stronger conclusion.",
+        },
+        "accept": {
+            "label": "Increase confidence because the selected source is consistent with Marcus's explanation.",
+            "status": "revise",
+            "feedback": "Consistency is not enough when the source cannot establish the relevant record, sequence, or original value.",
+        },
+        "reject": {
+            "label": "Decrease confidence because the selected source does not prove that Marcus is correct.",
+            "status": "revise",
+            "feedback": "Weak evidence should not be treated as evidence against the explanation; it leaves the question unresolved.",
+        },
+    },
+}
+
+
+UNRESOLVED_QUESTIONS = {
+    "dashboard": "whether the unique overrides were properly documented and authorized before dispatch",
+    "approval": "whether every sampled override received timely independent approval under authorized delegation",
+    "timing": "whether maintenance was completed before each sampled vehicle was released",
+    "edits": "whether post-review changes affected approval integrity while preserving the original record",
+}
+
+
+FOLLOW_UP_OPTIONS = {
+    "dashboard": {
+        "direct": {
+            "label": "Record-level authorization sequence",
+            "request": "Obtain the approval history, reason codes, work-order links, and dispatch timestamps for the 15 sampled overrides during the four-week period.",
+            "status": "strong",
+            "feedback": "This moves from dashboard counts to whether each underlying override satisfied the control before release.",
+        },
+        "summary": {
+            "label": "Another revised dashboard total",
+            "request": "Ask management to recalculate the dashboard and provide a new adjusted total.",
+            "status": "revise",
+            "feedback": "Another summary does not preserve the source-record mapping or approval sequence.",
+        },
+        "interview": {
+            "label": "Additional management explanation",
+            "request": "Interview another operations manager about why reopened work orders affect the dashboard.",
+            "status": "revise",
+            "feedback": "More inquiry may clarify the story, but it does not corroborate the population or control performance.",
+        },
+    },
+    "approval": {
+        "direct": {
+            "label": "Complete approval and dispatch history",
+            "request": "Obtain initiator, first approver, later approver, reason code, dispatch time, and delegation authority for each sampled override.",
+            "status": "strong",
+            "feedback": "This directly tests independence, timing, and whether an exception was authorized.",
+        },
+        "attest": {
+            "label": "Additional supervisor recollections",
+            "request": "Ask every supervisor whether they remember approving the sampled overrides.",
+            "status": "revise",
+            "feedback": "Recollection may generate leads but cannot reliably establish the record-level sequence.",
+        },
+        "dashboard": {
+            "label": "Exception-count dashboard",
+            "request": "Obtain the total number of overrides by shift and location.",
+            "status": "revise",
+            "feedback": "Counts may identify scope but do not establish who approved each record or when.",
+        },
+    },
+    "timing": {
+        "direct": {
+            "label": "Original cross-system event sequence",
+            "request": "Obtain device events, work-order versions, technician user IDs, dispatch timestamps, and first-movement telematics for unresolved sampled vehicles.",
+            "status": "strong",
+            "feedback": "This distinguishes late upload from late completion using independent timestamps.",
+        },
+        "incidents": {
+            "label": "Expanded safety-incident search",
+            "request": "Search for reported incidents involving any sampled vehicle after release.",
+            "status": "revise",
+            "feedback": "Outcome evidence does not establish whether maintenance was completed before dispatch.",
+        },
+        "attest": {
+            "label": "Technician confirmation",
+            "request": "Ask technicians whether they remember completing the work before release.",
+            "status": "revise",
+            "feedback": "Recollection cannot replace preserved event times and independent dispatch data.",
+        },
+    },
+    "edits": {
+        "direct": {
+            "label": "Before-and-after field history",
+            "request": "Obtain the immutable journal, before-and-after values, user sessions, timestamps, and related change tickets for all twelve edited records.",
+            "status": "strong",
+            "feedback": "This identifies which fields changed, who changed them, and whether a system process explains the edit.",
+        },
+        "current": {
+            "label": "Current clean export",
+            "request": "Obtain the latest version of the edited records and confirm that every field is now complete.",
+            "status": "revise",
+            "feedback": "The current state cannot establish the original values or edit sequence.",
+        },
+        "attest": {
+            "label": "System-owner confirmation",
+            "request": "Ask the system owner to confirm that the edits were routine data hygiene.",
+            "status": "revise",
+            "feedback": "An explanation is inquiry; the field-level journal and system records provide corroboration.",
+        },
+    },
+}
