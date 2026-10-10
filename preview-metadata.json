@@ -1,0 +1,11 @@
+{
+  "repository": "cybercrs/signal-or-story",
+  "source_branch": "rollout/stlite-browser-navigation",
+  "source_commit": "2924632455715a4644d4ff2fffcbbe5fb912144a",
+  "static_branch": "stlite-browser",
+  "main_commit": "023ba3fc460d7ade602fdf81f189d879b7a68fe5",
+  "runtime": "stlite 1.8.1 / Streamlit 1.57.0 / Pyodide 0.29.3",
+  "activation": "Settings > Pages > Deploy from a branch > stlite-browser > / (root)",
+  "pages_existed_before_publish": false,
+  "hosted_ui_verified": false
+}
