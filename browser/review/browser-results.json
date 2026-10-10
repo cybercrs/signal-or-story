@@ -1,0 +1,92 @@
+{
+  "checks": [
+    {
+      "name": "Actual stlite/Wasm runtime and subdirectory asset paths",
+      "status": "passed"
+    },
+    {
+      "name": "Complete session-only investigation, preserved draft, consequences, both revisions and six-token budget",
+      "status": "passed"
+    },
+    {
+      "name": "Full read-only review preserves answers, drafts, attempts and earned progress",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard focus and Enter navigation",
+      "status": "passed"
+    },
+    {
+      "name": "390-pixel layout and compact 44-pixel touch targets",
+      "status": "passed"
+    },
+    {
+      "name": "Independent browser session starts fresh",
+      "status": "passed"
+    },
+    {
+      "name": "Future-view rejection and expected bookmark restoration",
+      "status": "passed"
+    },
+    {
+      "name": "Refresh/bookmark starts a new session-only investigation",
+      "status": "passed"
+    },
+    {
+      "name": "Start over and refresh remain at a fresh activity",
+      "status": "passed"
+    },
+    {
+      "name": "Invalid saved progress cannot reveal future pages",
+      "status": "passed"
+    },
+    {
+      "name": "No external requests, HTTP asset errors or browser execution errors",
+      "status": "passed"
+    }
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "external_requests": [],
+  "http_errors": [],
+  "not_run": [
+    "Hosted HTTPS UI (cloud proxy restriction)",
+    "Physical classroom device/browser matrix",
+    "Classroom simultaneous cold-start/capacity trial"
+  ],
+  "runtime": {
+    "python": "3.13.2",
+    "streamlit": "1.57.0",
+    "pyodide": "0.29.3"
+  },
+  "navigation_layout": {
+    "desktop": [
+      {
+        "x": 1024,
+        "y": 235.1875,
+        "width": 44,
+        "height": 44
+      },
+      {
+        "x": 1076,
+        "y": 235.1875,
+        "width": 44,
+        "height": 44
+      }
+    ],
+    "narrow": [
+      {
+        "x": 278,
+        "y": 267.1875,
+        "width": 44,
+        "height": 44
+      },
+      {
+        "x": 330,
+        "y": 267.1875,
+        "width": 44,
+        "height": 44
+      }
+    ]
+  }
+}
