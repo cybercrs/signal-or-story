@@ -1,7 +1,7 @@
 {
   "repository": "cybercrs/signal-or-story",
   "source_branch": "rollout/native-browser",
-  "source_commit": "396fd507c54da9fc1333c11d1aed3dd8374a8949",
-  "existing_static_parent": "de4532d900cedf6850d18a787d99b21abf5bca1b",
+  "source_commit": "1534bc4ee33de43e31e0bd35fb82a3a3b0498fa6",
+  "existing_static_parent": "aa3c0e8613e8e001d62e381ea8412e4b14aca845",
   "entrypoint": "js/index.html"
 }
