@@ -1,0 +1,40 @@
+{
+  "entrypoint": "index.html",
+  "canonical_directory": "js/",
+  "files": {
+    "app.js": {
+      "bytes": 12103,
+      "sha256": "3641b8174041793731d09e24b7a2863d8c7c5ca46a61f77035856db8c23a5904"
+    },
+    "content.js": {
+      "bytes": 40570,
+      "sha256": "aea1ed9d04153193db112fafc6dc573065303ca96060370ff8c5cea2ce036ea3"
+    },
+    "core.js": {
+      "bytes": 4524,
+      "sha256": "42a77597b3d129d752d26072e66e62044bc5933dab5961d38b5751bf01f3febd"
+    },
+    "engine.js": {
+      "bytes": 8358,
+      "sha256": "e3de39766935d9307ea7ba5a2d3b2a65f5b4743f629fc9003783d8638f91016f"
+    },
+    "index.html": {
+      "bytes": 1966,
+      "sha256": "ede0c8015e702ff8aee5bb8311e53967b981557c67efaccd0a4dc5e07074bf5e"
+    },
+    "original.css": {
+      "bytes": 7177,
+      "sha256": "807dee7f3ed511c14c661489d461c4a356afcbb0219da4e1967bcd9d1b2366d6"
+    },
+    "style.css": {
+      "bytes": 6700,
+      "sha256": "a4435726a9abb552661dd6e136f0fcc899bf9beceefe701f67dd04841e71c875"
+    },
+    "ui.js": {
+      "bytes": 5257,
+      "sha256": "58710b2029302915c62db08cb44801dc3b45c83d61e502846417fd51d8d65e2d"
+    }
+  },
+  "application_bytes": 86655,
+  "python_runtime": false
+}

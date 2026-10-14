@@ -1,0 +1,111 @@
+{
+  "checks": [
+    {
+      "name": "Native /js/ cold initialization with forward locked",
+      "status": "passed"
+    },
+    {
+      "name": "Team 1: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 2: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 3: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 4: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 5: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 6: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 7: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 8: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 9: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 10: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 11: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Team 12: complete original route, wrong response/judgment, both revisions, six-token budget and draft review",
+      "status": "passed"
+    },
+    {
+      "name": "Two-question/two-source route preserves mandatory response and judgment tokens",
+      "status": "passed"
+    },
+    {
+      "name": "Final student-facing title and all twelve rendered route variants",
+      "status": "passed"
+    },
+    {
+      "name": "All reached pages review readonly; forward capped; progress token unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard focus ring and Enter navigation",
+      "status": "passed"
+    },
+    {
+      "name": "390px layout, no page overflow, 44px navigation touch targets",
+      "status": "passed"
+    },
+    {
+      "name": "Independent sessions start fresh",
+      "status": "passed"
+    },
+    {
+      "name": "Refresh/bookmark behavior matches original saving design",
+      "status": "passed"
+    },
+    {
+      "name": "Malformed/future bookmarks and reset remain fresh",
+      "status": "passed"
+    },
+    {
+      "name": "No external requests, asset failures, or browser execution errors",
+      "status": "passed"
+    }
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "external_requests": [],
+  "http_errors": [],
+  "hosted_ui_tested": false,
+  "measurement": {
+    "local_cold_navigation_to_ready_ms": 208.4,
+    "viewport": "1280x900",
+    "browser": "151.0.7922.173",
+    "browser_context": "new context; local loopback HTTP; no simulated network latency; cache empty",
+    "application_bytes": 86235,
+    "gzip_bytes_sum": 27162,
+    "capacity_claim": false
+  },
+  "not_run": [
+    "Hosted UI: known proxy denial",
+    "Physical classroom devices/network",
+    "Classroom concurrent capacity"
+  ]
+}

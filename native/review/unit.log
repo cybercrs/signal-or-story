@@ -1,0 +1,32 @@
+test_accusatory_question_is_flagged (test_case_logic.CoachingTests.test_accusatory_question_is_flagged) ... ok
+test_each_lens_has_three_follow_up_choices (test_case_logic.CoachingTests.test_each_lens_has_three_follow_up_choices) ... ok
+test_interpretation_and_conclusion_are_tied_to_evidence_impact (test_case_logic.CoachingTests.test_interpretation_and_conclusion_are_tied_to_evidence_impact) ... ok
+test_interview_choices_prepare_matching_sources_without_gating_others (test_case_logic.CoachingTests.test_interview_choices_prepare_matching_sources_without_gating_others) ... ok
+test_interview_tone_changes_access (test_case_logic.CoachingTests.test_interview_tone_changes_access) ... ok
+test_multiple_sources_preserve_conflicting_results (test_case_logic.CoachingTests.test_multiple_sources_preserve_conflicting_results) ... ok
+test_neutral_evidence_question_receives_positive_feedback (test_case_logic.CoachingTests.test_neutral_evidence_question_receives_positive_feedback) ... ok
+test_neutral_risk_statement_is_recognized (test_case_logic.CoachingTests.test_neutral_risk_statement_is_recognized) ... ok
+test_predictions_do_not_repeat_the_conditional_prompt (test_case_logic.CoachingTests.test_predictions_do_not_repeat_the_conditional_prompt) ... ok
+test_pressure_feedback_changes_with_evidence_impact (test_case_logic.CoachingTests.test_pressure_feedback_changes_with_evidence_impact) ... ok
+test_shared_budget_forces_breadth_or_revision_tradeoff (test_case_logic.CoachingTests.test_shared_budget_forces_breadth_or_revision_tradeoff) ... ok
+test_specific_evidence_request_is_recognized (test_case_logic.CoachingTests.test_specific_evidence_request_is_recognized) ... ok
+test_each_route_resolves_to_a_valid_lens_and_evidence_set (test_case_logic.RouteStructureTests.test_each_route_resolves_to_a_valid_lens_and_evidence_set) ... ok
+test_every_evidence_result_has_valid_impact_and_substance (test_case_logic.RouteStructureTests.test_every_evidence_result_has_valid_impact_and_substance) ... ok
+test_invalid_team_and_evidence_are_rejected (test_case_logic.RouteStructureTests.test_invalid_team_and_evidence_are_rejected) ... ok
+test_routes_cycle_evenly_across_four_lenses (test_case_logic.RouteStructureTests.test_routes_cycle_evenly_across_four_lenses) ... ok
+test_twelve_unique_team_routes_exist (test_case_logic.RouteStructureTests.test_twelve_unique_team_routes_exist) ... ok
+test_all_sources_are_available_but_unprepared_evidence_is_less_useful (test_streamlit_smoke.StreamlitSmokeTests.test_all_sources_are_available_but_unprepared_evidence_is_less_useful) ... 2026-10-14 19:43:58.847 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_interview_can_be_skipped_without_hiding_evidence (test_streamlit_smoke.StreamlitSmokeTests.test_interview_can_be_skipped_without_hiding_evidence) ... 2026-10-14 19:43:59.096 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_navigation_copy_and_scroll_resets_stop_after_student_input (test_streamlit_smoke.StreamlitSmokeTests.test_navigation_copy_and_scroll_resets_stop_after_student_input) ... ok
+test_setup_screen_renders_without_exception (test_streamlit_smoke.StreamlitSmokeTests.test_setup_screen_renders_without_exception) ... 2026-10-14 19:43:59.214 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+test_student_copy_uses_plain_reporting_language (test_streamlit_smoke.StreamlitSmokeTests.test_student_copy_uses_plain_reporting_language) ... ok
+test_team_one_opens_without_internal_route_code_or_free_text (test_streamlit_smoke.StreamlitSmokeTests.test_team_one_opens_without_internal_route_code_or_free_text) ... 2026-10-14 19:43:59.237 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.436s
+
+OK
