@@ -95,12 +95,12 @@
   "http_errors": [],
   "hosted_ui_tested": false,
   "measurement": {
-    "local_cold_navigation_to_ready_ms": 208.4,
+    "local_cold_navigation_to_ready_ms": 165.6,
     "viewport": "1280x900",
     "browser": "151.0.7922.173",
     "browser_context": "new context; local loopback HTTP; no simulated network latency; cache empty",
-    "application_bytes": 86235,
-    "gzip_bytes_sum": 27162,
+    "application_bytes": 86662,
+    "gzip_bytes_sum": 27274,
     "capacity_claim": false
   },
   "not_run": [

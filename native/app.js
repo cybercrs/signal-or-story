@@ -1,5 +1,5 @@
 import {DATA as C} from './content.js';
-import {Lesson,prepared,interviewEffect,conclusions} from './engine.js';
+import {Lesson,prepared,interviewEffect,impact,conclusions} from './engine.js';
 import {$,el,html,nodes,radio,action,notice,frame,escape,scroll} from './ui.js';
 const labels=['Setup','Case brief','Interview','Evidence','Pressure','Judgment','Takeaway'];let lesson=new Lesson();
 const add=(...items)=>$('lesson').append(...items),card=s=>html(s);

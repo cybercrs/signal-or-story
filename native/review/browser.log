@@ -1,1 +1,22 @@
 PASSED: Native /js/ cold initialization with forward locked
+PASSED: Team 1: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 2: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 3: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 4: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 5: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 6: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 7: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 8: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 9: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 10: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 11: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Team 12: complete original route, wrong response/judgment, both revisions, six-token budget and draft review
+PASSED: Two-question/two-source route preserves mandatory response and judgment tokens
+PASSED: Final student-facing title and all twelve rendered route variants
+PASSED: All reached pages review readonly; forward capped; progress token unchanged
+PASSED: Keyboard focus ring and Enter navigation
+PASSED: 390px layout, no page overflow, 44px navigation touch targets
+PASSED: Independent sessions start fresh
+PASSED: Refresh/bookmark behavior matches original saving design
+PASSED: Malformed/future bookmarks and reset remain fresh
+PASSED: No external requests, asset failures, or browser execution errors

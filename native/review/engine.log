@@ -1,7 +1,7 @@
-✔ All 1080 Python route/interview/evidence outcomes match native calculations (12.519789ms)
-✔ All 12 complete routes, deliberate wrong response and judgment, each revision and token guards (3.016494ms)
-✔ Two questions/two sources reserve mandatory response/judgment, zero questions downgrade evidence (0.318447ms)
-✔ Fresh lessons do not import old/native bookmarks or previous session state (0.344897ms)
+✔ All 1080 Python route/interview/evidence outcomes match native calculations (12.55188ms)
+✔ All 12 complete routes, deliberate wrong response and judgment, each revision and token guards (3.011896ms)
+✔ Two questions/two sources reserve mandatory response/judgment, zero questions downgrade evidence (0.320861ms)
+✔ Fresh lessons do not import old/native bookmarks or previous session state (0.32017ms)
 ℹ tests 4
 ℹ suites 0
 ℹ pass 4
@@ -9,4 +9,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 93.257242
+ℹ duration_ms 92.061218

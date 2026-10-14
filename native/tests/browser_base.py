@@ -26,7 +26,12 @@ def run(walk,session_only=False):
   page.on('response',lambda r:results['http_errors'].append({'url':r.url,'status':r.status}) if r.status>=400 else None)
   start=time.perf_counter();page.goto(origin);ready(page);elapsed=(time.perf_counter()-start)*1000
   page.screenshot(path=str(screens/'briefing-desktop.png'),full_page=True);assert page.get_by_role('button',name='Forward',exact=True).is_disabled();passed('Native /js/ cold initialization with forward locked')
-  walk(page,origin,ready,click,passed,screens)
+  try:
+   walk(page,origin,ready,click,passed,screens)
+  except Exception:
+   page.screenshot(path=str(screens/'failure.png'),full_page=True)
+   (screens/'failure.html').write_text(page.content())
+   raise
   ready(page);saved=page.url;before=parse_qs(urlsplit(saved).query).get('progress');current=page.locator('html').get_attribute('data-reached')
   for _ in range(int(current)):click(page,'Back')
   assert page.locator('html').get_attribute('data-view')=='0';assert page.get_by_role('button',name='Start over',exact=True).is_disabled();assert all(n.is_disabled() for n in page.locator('input,select,textarea').all());assert before==parse_qs(urlsplit(page.url).query).get('progress')

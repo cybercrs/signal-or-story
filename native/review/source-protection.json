@@ -1,0 +1,15 @@
+{
+  "main_baseline": "023ba3fc460d7ade602fdf81f189d879b7a68fe5",
+  "all_original_files_preserved_except_additive_gitignore": true,
+  "sha256": {
+    ".github/workflows/ci.yml": "6b63b2219b1cb953c9622498b142f080095ddd8dab282844d13777d6e08a8f78",
+    ".streamlit/config.toml": "91482801810b6b853babff4246a4200403fec34ab1ade2bfc5bb30eb3962401d",
+    "README.md": "14bad8a09579211152a1a268d78b221cbd2f9d8a06cc43507e97f3b740aba171",
+    "case_content.py": "83e55b839be056ef28c7dc2b5854fc38348df99fb44cd48f21b822b1e08db531",
+    "case_logic.py": "0169e03d1da1beff18878c7bad6f1b46f64b9a4c618e68d8561c99e1f7c2fc64",
+    "requirements.txt": "fba00c09b6615c7862111a795a8c8808abc38bb80e8995886a68db8f75166673",
+    "streamlit_app.py": "87e484a14e73c4a863094b268f0a45359f5d7f3e54676c8139126f0959d97cb9",
+    "tests/test_case_logic.py": "a3378320c5d092302604a1aea2e7eeb16b55c8d02b4495655eba08684e724abb",
+    "tests/test_streamlit_smoke.py": "8660dd4545cd33a76be516cd9d0d42eebd78578adfddb913d9872425f275b3b7"
+  }
+}

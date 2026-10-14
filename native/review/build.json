@@ -3,8 +3,8 @@
   "canonical_directory": "js/",
   "files": {
     "app.js": {
-      "bytes": 12103,
-      "sha256": "3641b8174041793731d09e24b7a2863d8c7c5ca46a61f77035856db8c23a5904"
+      "bytes": 12110,
+      "sha256": "b78c214d7e0093cfd10ffa51a70a58b799ef77b549bdb43d565d00c73728112f"
     },
     "content.js": {
       "bytes": 40570,
@@ -35,6 +35,6 @@
       "sha256": "58710b2029302915c62db08cb44801dc3b45c83d61e502846417fd51d8d65e2d"
     }
   },
-  "application_bytes": 86655,
+  "application_bytes": 86662,
   "python_runtime": false
 }
